@@ -26,9 +26,8 @@ Pelagianoctiluca = specie2 ['scientificName'].astype('str')
 # Opciones de visualizacion de la especie
 # Debeis ajustar las coordenadas y el zoom del mapa a la localizacion de la especie
 # Muchas mas en: http://python-visualization.github.io/folium/docs-v0.5.0/modules.html
-m = folium.Map(location=[50, 10], zoom_start=2,tiles='Stamen Watercolor')
 
-e = folium.Icon(color = 'lightgreen')
+m = folium.Map(location=[50, 10], zoom_start=2,tiles='Stamen Watercolor')
 
 # Creacion del conjunto de puntos
 feature_group = folium.FeatureGroup('Ocurrences', overlay=True, control = True )
@@ -41,6 +40,7 @@ for lon2, lat2, Pelagianoctiluca in zip(lon2,lat2, Pelagianoctiluca):
     feature_group.add_child(folium.Marker(location= [lat2, lon2], popup= Pelagianoctiluca))
 
 # Se incorporan los puntos al mapa
+
 m.add_child(feature_group)
 
 # Se guarda el mapa como una pagina web
