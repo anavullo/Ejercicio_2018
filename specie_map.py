@@ -15,23 +15,24 @@ lon, lat = specie['decimalLongitude'], specie['decimalLatitude']
 # MODIFICABLE
 # Lectura de datos adicionales (se deben convertir a cadena para visualizarlos)
 dates = specie['eventDate'].astype('str')
-Aurelia_aurita = specie ['scientificName'].astype('str')
+
+Aureliaaurita = specie ['scientificName'].astype('str')
 
 # MODIFICABLE
 # Opciones de visualizacion de la especie
 # Debeis ajustar las coordenadas y el zoom del mapa a la localizacion de la especie
 # Muchas mas en: http://python-visualization.github.io/folium/docs-v0.5.0/modules.html
-m = folium.Map(location=[50, 10], zoom_start=4, tiles='Stamen Watercolor')
+m = folium.Map(location=[50, 10], zoom_start=2,tiles='Stamen Watercolor')
 
 # Creacion del conjunto de puntos
 feature_group = folium.FeatureGroup('Ocurrences')
 
 # MODIFICABLE
-for lon, lat, date in zip(lon, lat, dates):
-    feature_group.add_child(folium.Marker(location=[lat, lon], popup=date))
+for lon, lat, dates, Aureliaaurita in zip(lon, lat, dates, Aureliaaurita): 
+    feature_group.add_child(folium.Marker(location= [lat, lon], popup= Aureliaaurita))
 
 # Se incorporan los puntos al mapa
 m.add_child(feature_group)
 
 # Se guarda el mapa como una pagina web
-m.save('index.html')
+m.save('Aurelia_Aurita.html')
