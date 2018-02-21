@@ -9,14 +9,18 @@ import folium
 # que se llame specie con pd.read_csv
 specie = pd.read_csv('Aurelia_aurita.csv')
 
+specie2 = pd.read_csv('Pelagia_noctiluca.csv')
+
 # Lectura de latitud y longitud de las observaciones
-lon, lat = specie['decimalLongitude'], specie['decimalLatitude']
+lon, lat, lon2, lat2 = specie['decimalLongitude'], specie['decimalLatitude'], specie2 ['decimalLongitude'], specie2 ['decimalLatitude']
 
 # MODIFICABLE
 # Lectura de datos adicionales (se deben convertir a cadena para visualizarlos)
-dates = specie['eventDate'].astype('str')
 
 Aureliaaurita = specie ['scientificName'].astype('str')
+
+Pelagianoctiluca = specie2 ['scientificName'].astype('str')
+ 
 
 # MODIFICABLE
 # Opciones de visualizacion de la especie
@@ -24,15 +28,20 @@ Aureliaaurita = specie ['scientificName'].astype('str')
 # Muchas mas en: http://python-visualization.github.io/folium/docs-v0.5.0/modules.html
 m = folium.Map(location=[50, 10], zoom_start=2,tiles='Stamen Watercolor')
 
+e = folium.Icon(color = 'lightgreen')
+
 # Creacion del conjunto de puntos
-feature_group = folium.FeatureGroup('Ocurrences')
+feature_group = folium.FeatureGroup('Ocurrences', overlay=True, control = True )
 
 # MODIFICABLE
-for lon, lat, dates, Aureliaaurita in zip(lon, lat, dates, Aureliaaurita): 
+for lon, lat, Aureliaaurita in zip(lon,lat, Aureliaaurita): 
     feature_group.add_child(folium.Marker(location= [lat, lon], popup= Aureliaaurita))
+    
+for lon2, lat2, Pelagianoctiluca in zip(lon2,lat2, Pelagianoctiluca): 
+    feature_group.add_child(folium.Marker(location= [lat2, lon2], popup= Pelagianoctiluca))
 
 # Se incorporan los puntos al mapa
 m.add_child(feature_group)
 
 # Se guarda el mapa como una pagina web
-m.save('Aurelia_Aurita.html')
+m.save('Especies.html')
