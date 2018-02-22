@@ -14,8 +14,8 @@ specie = pd.read_csv('Aurelia_aurita.csv')
 specie2 = pd.read_csv('Pelagia_noctiluca.csv')
 
 # Lectura de latitud y longitud de las observaciones
-lon, lat, lon2, lat2 = specie['decimalLongitude'], specie['decimalLatitude'], 
-specie2 ['decimalLongitude'], specie2 ['decimalLatitude']
+lon, lat, lon2, lat2 = (specie['decimalLongitude'], specie['decimalLatitude'], 
+specie2 ['decimalLongitude'], specie2 ['decimalLatitude'])
 
 # MODIFICABLE
 # Lectura de datos adicionales (se deben convertir a cadena para visualizarlos)
