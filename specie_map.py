@@ -34,14 +34,16 @@ feature_group = folium.FeatureGroup('Ocurrences', overlay=True, control = True )
 
 # MODIFICABLE
 for lon, lat, Aureliaaurita in zip(lon,lat, Aureliaaurita): 
-    feature_group.add_child(folium.Marker(location= [lat, lon], popup= Aureliaaurita))
+    feature_group.add_child(folium.RegularPolygonMarker(location= [lat, lon], popup= Aureliaaurita, 
+                                                        fill_color='#31cccc', number_of_sides=5,radius=10))
     
 for lon2, lat2, Pelagianoctiluca in zip(lon2,lat2, Pelagianoctiluca): 
-    feature_group.add_child(folium.Marker(location= [lat2, lon2], popup= Pelagianoctiluca))
+    feature_group.add_child(folium.RegularPolygonMarker(location= [lat2, lon2], popup= Pelagianoctiluca, 
+                                                        fill_color='#ed9e21', number_of_sides=6,radius=10))
 
 # Se incorporan los puntos al mapa
 
 m.add_child(feature_group)
 
 # Se guarda el mapa como una pagina web
-m.save('Especies.html')
+m.save('Especiesporcolor.html')
