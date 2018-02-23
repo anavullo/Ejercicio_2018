@@ -24,6 +24,10 @@ specie2 ['decimalLongitude'], specie2 ['decimalLatitude'])
 Aureliaaurita = specie ['scientificName'].astype('str')
 
 Pelagianoctiluca = specie2 ['scientificName'].astype('str')
+
+dates = specie ['eventDate'].astype('str')
+
+dates2 = specie2 ['eventDate'].astype('str')
  
 
 # MODIFICABLE
@@ -35,25 +39,32 @@ m = folium.Map(location=[40, 20], zoom_start=2,tiles='Stamen Terrain',
                control_scale = True, prefer_canvas = True)
 
 # Creacion del conjunto de puntos
-feature_group = folium.FeatureGroup('Ocurrences', overlay=True, control = True)
+feature_group = folium.FeatureGroup(name = 'Aurelia aurita')
+
+feature_group2 = folium.FeatureGroup(name = 'Pelagia noctiluca')
+
 
 # MODIFICABLE
 
 #Conjunto de puntos de Aurelia aurita
-for lon, lat, Aureliaaurita in zip(lon,lat, Aureliaaurita): 
-    feature_group.add_child(folium.RegularPolygonMarker(location= [lat, lon], popup= Aureliaaurita, 
+for lon, lat, dates in zip(lon,lat, dates): 
+    feature_group.add_child(folium.RegularPolygonMarker(location= [lat, lon], popup= dates, 
                                                         fill_color='#31cccc', number_of_sides=5,
                                                         radius=10))
  
 #Conjunto de puntos de Pelagia noctiluca    
-for lon2, lat2, Pelagianoctiluca in zip(lon2,lat2, Pelagianoctiluca): 
-    feature_group.add_child(folium.RegularPolygonMarker(location= [lat2, lon2], popup= Pelagianoctiluca, 
+for lon2, lat2, dates2 in zip(lon2,lat2, dates2): 
+    feature_group2.add_child(folium.RegularPolygonMarker(location= [lat2, lon2], popup= dates2, 
                                                         fill_color='#ed9e21', number_of_sides=6,
                                                         radius=10))
 
 # Se incorporan los puntos al mapa
 
 m.add_child(feature_group)
+m.add_child(feature_group2)
+
+#Se agregan como dos capas, para poder diferenciar las dos especies
+folium.LayerControl().add_to(m)
 
 # Se guarda el mapa como una pagina web
-m.save('Especiesporcolor.html')
+m.save('EspeciesFinal.html')
